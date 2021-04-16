@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import "bootstrap-css-only/css/bootstrap.min.css";
+import '@fortawesome/fontawesome-free';
+import "bootstrap-css-only";
 import "mdbreact/dist/css/mdb.css";
-import './LoginForm.css'
+
 import fire from '../config/firebase'
 
 
