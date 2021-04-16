@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// Router
+import { Route } from 'react-router-dom';
 
-export default App;
+//import Components and Pages
+import LoginPage from './components/LoginPage'
+import Home from './components/Home'
+//หน้าแอปส่วนหลักในการทำการ Route และrender หน้า
+
+import fire from './config/fire'
+
+
+const App = () => { 
+
+const [user, setUser] = useState({})
+
+  useEffect(() => {
+    authListener();
+  },[user])
+
+  const authListener = () => {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+      console.log(user);
+      setUser({user})
+      }
+      else {
+        setUser(null)
+      }
+    })
+  }
+
+
+    return (
+      <div>
+        <div>
+          {user === null && (<LoginPage />)}
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={LoginPage} />
+        </div>
+      </div>
+    )
+  }
+
+export default App
