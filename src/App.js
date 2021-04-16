@@ -5,21 +5,22 @@ import './App.css';
 import { Route } from 'react-router-dom';
 
 //import Components and Pages
-import LoginPage from './components/LoginPage'
+import LoginPage from './components/Login'
 import Home from './components/Home'
 //หน้าแอปส่วนหลักในการทำการ Route และrender หน้า
 
-import fire from './config/fire'
-
+import fire from './config/firebase'
 
 const App = () => { 
 
-const [user, setUser] = useState({})
+const [user, setUser] = useState([])
 
   useEffect(() => {
     authListener();
   },[user])
 
+
+  
   const authListener = () => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -28,6 +29,7 @@ const [user, setUser] = useState({})
       }
       else {
         setUser(null)
+  
       }
     })
   }
