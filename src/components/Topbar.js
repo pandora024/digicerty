@@ -15,6 +15,7 @@ import { Nav, Navbar, Button, Form, FormControl } from 'react-bootstrap'
 const Topbar = () => {
 
     const logout = () => {
+        console.log('Hiiiiiiiiiiiiiiiii')
 
         fire.auth().signOut();
     }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './App.css';
 
 // Router
@@ -9,48 +9,47 @@ import Login from './components/Login'
 import Home from './components/Home'
 //หน้าแอปส่วนหลักในการทำการ Route และrender หน้า
 
-import fire from './config/firebase'
+import fire from './config/fire'
 
 const App = () => { 
 
-const [user, setUser] = useState([])
+const [user, setUser] = useState({})
 
- useEffect(() => {
-    const authListener = () => {
-     fire.auth().onAuthStateChanged((user) => {
-       if (user) {
-       console.log(user);
-       setUser({user})
-     }
-       else {
-         setUser(null)
-       }
-     })
-   }
-  },[])
+//  useEffect(() => {
+//     authListener
+//   },[])
 
-  // const authListener = () => {
-  //   fire.auth().onAuthStateChanged((user) => {
-  //     if (user) {
-  //     console.log(user);
-  //     setUser({user})
-  //     }
-  //     else {
-  //       setUser(null)
-  //     }
-  //   })
-  // }
+ useMemo(() => {
+  fire.auth().onAuthStateChanged((user) => {
+    if (user) {
+      setUser({user})
+    }
+    else {
+      setUser({user :null})
+    }
+  })
+},[user])
 
 
-    return (
-      <div>
-        <div>
-          {user === null && (<Login />)}
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-        </div>
-      </div>
-    )
-  }
+if (user == null) {
+  return (
+    <div>
+      <Login />
+    </div>
+
+  );
+}
+else {
+return (
+<div>
+  <div>
+    <Route exact path="/" component={Home} />
+    <Route path="/login" component={Login} />
+  
+  </div>
+</div>
+)
+}
+}
 
 export default App

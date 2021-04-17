@@ -7,7 +7,7 @@ import {BrowserRouter, Router, Route, Link} from 'react-router-dom'
 import {browserHistory} from 'react-router'
 import ReactDOM, {render} from 'react-dom';
 
-render(
+ReactDOM.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
