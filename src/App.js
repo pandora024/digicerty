@@ -16,21 +16,31 @@ const App = () => {
 
 const [user, setUser] = useState({})
 
-  useEffect(() => {
-    authListener();
-  },[user])
+ useEffect(() => {
+    const authListener = () => {
+     fire.auth().onAuthStateChanged((user) => {
+       if (user) {
+       console.log(user);
+       setUser({user})
+     }
+       else {
+         setUser(null)
+       }
+     })
+   }
+  },[])
 
-  const authListener = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-      console.log(user);
-      setUser(user)
-      }
-      else {
-        setUser(null)
-      }
-    })
-  }
+  // const authListener = () => {
+  //   fire.auth().onAuthStateChanged((user) => {
+  //     if (user) {
+  //     console.log(user);
+  //     setUser({user})
+  //     }
+  //     else {
+  //       setUser(null)
+  //     }
+  //   })
+  // }
 
 
     return (
