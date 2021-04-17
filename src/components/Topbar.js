@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 //import fire from firebase authen
 
-import fire from '../config/firebase'
+import fire from '../config/fire'
 
 //import bootstrap components
 

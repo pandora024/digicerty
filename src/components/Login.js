@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBInput } from 'mdbreact';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import './LoginForm.css'
-import fire from '../config/firebase'
+import fire from '../config/fire'
 
 
-const LoginPage = () => {
+const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const login = e => {
+
         e.preventDefault();
         fire.auth().signInWithEmailAndPassword(email, password).then((u) => {
             console.log(u)
@@ -23,6 +24,7 @@ const LoginPage = () => {
 
 
     const signup = e => {
+
         e.preventDefault()
         fire.auth().createUserWithEmailAndPassword(email, password).then((u) => {
             console.log(u)
@@ -33,27 +35,83 @@ const LoginPage = () => {
 
 
     return (
-        <div >
             <MDBContainer>
-                <MDBRow className="LoginForm">
-                    <MDBCol md="9">
-                        <form>
-                            <p className="h5 text-center mb-4">Sign up</p>
-                            <div className="grey-text">
-                                <MDBInput label="Your email" group type="email" validate error="wrong"
-                                    success="right" name="email" onChange={(e) => setEmail(e.target.value)} />
-                                <MDBInput label="Your password" group type="password" name="password" validate onChange={(e) => setPassword(e.target.value)} />
-                            </div>
-                            <div className="text-center">
-                                <MDBBtn color="primary" onClick={login}>LOGIN</MDBBtn>
-                                <MDBBtn color="primary" onClick={signup}>Register</MDBBtn>
-                            </div>
-                        </form>
-                    </MDBCol>
-                </MDBRow>
-            </MDBContainer>
-        </div>
+      <MDBRow>
+        <MDBCol md='6'>
+          <MDBCard
+            className='card-image'
+            style={{
+              backgroundImage:
+                'url(https://mdbcdn.b-cdn.net/img/Photos/Others/pricing-table7.jpg)',
+              width: '28rem'
+            }}
+          >
+            <div className='text-white rgba-stylish-strong py-5 px-5 z-depth-4'>
+              <div className='text-center'>
+                <h3 className='white-text mb-5 mt-4 font-weight-bold'>
+                  <strong>SIGN</strong>
+                  <a href='#!' className='green-text font-weight-bold'>
+                    <strong> UP</strong>
+                  </a>
+                </h3>
+              </div>
+              <MDBInput
+                label='Your email'
+                group
+                type='text'
+                validate
+                labelClass='white-text'
+
+              />
+              <MDBInput
+                label='Your password'
+                group
+                type='password'
+                validate
+                labelClass='white-text'
+              />
+              <div className='md-form pb-3'>
+                <MDBInput
+                  label={
+                    <>
+                      Accept the&nbsp;
+                      <a href='#!' className='green-text font-weight-bold'>
+                        Terms and Conditions
+                      </a>
+                    </>
+                  }
+                  type='checkbox'
+                  id='checkbox1'
+                  labelClass='white-text'
+                />
+              </div>
+            
+              <MDBRow className='d-flex align-items-center mb-4'>
+                <div className='text-center mb-3 col-md-12'>
+                  <MDBBtn
+                    color='success'
+                    rounded
+                    type='button'
+                    className='btn-block z-depth-1'
+                  >
+                    Sign in
+                  </MDBBtn>
+                </div>
+              </MDBRow>
+              <MDBCol md='12'>
+                <p className='font-small white-text d-flex justify-content-end'>
+                  Have an account?
+                  <a href='#!' className='green-text ml-1 font-weight-bold'>
+                    Log in
+                  </a>
+                </p>
+              </MDBCol>
+            </div>
+          </MDBCard>
+          </MDBCol>
+          </MDBRow>
+          </MDBContainer>
     )
 }
 
-export default LoginPage;
+export default Login;
