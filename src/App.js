@@ -9,12 +9,11 @@ import Login from './components/Login'
 import Home from './components/Home'
 //หน้าแอปส่วนหลักในการทำการ Route และrender หน้า
 
-import fire from './config/fire'
-
+import fire from './config/firebase'
 
 const App = () => { 
 
-const [user, setUser] = useState({})
+const [user, setUser] = useState([])
 
  useEffect(() => {
     const authListener = () => {
