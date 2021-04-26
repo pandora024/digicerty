@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBInput } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
@@ -23,94 +23,97 @@ const Login = () => {
     }
 
 
-    const signup = e => {
-
-        e.preventDefault()
-        fire.auth().createUserWithEmailAndPassword(email, password).then((u) => {
-            console.log(u)
-        }).catch((err) => {
-            console.log(err)
-        })
-    }
-
 
     return (
-            <MDBContainer>
+      <MDBContainer>
       <MDBRow>
-        <MDBCol md='6'>
-          <MDBCard
-            className='card-image'
-            style={{
-              backgroundImage:
-                'url(https://mdbcdn.b-cdn.net/img/Photos/Others/pricing-table7.jpg)',
-              width: '28rem'
-            }}
-          >
-            <div className='text-white rgba-stylish-strong py-5 px-5 z-depth-4'>
-              <div className='text-center'>
-                <h3 className='white-text mb-5 mt-4 font-weight-bold'>
-                  <strong>SIGN</strong>
-                  <a href='#!' className='green-text font-weight-bold'>
-                    <strong> UP</strong>
-                  </a>
+        <MDBCol md="6">
+          <MDBCard>
+            <MDBCardBody className="mx-4">
+              <div className="text-center">
+                <h3 className="dark-grey-text mb-5">
+                  <strong>Sign in</strong>
                 </h3>
               </div>
               <MDBInput
-                label='Your email'
+                label="Your email"
                 group
-                type='text'
+                type="email"
                 validate
-                labelClass='white-text'
-
+                error="wrong"
+                success="right"
+                onChange={(e)=> setEmail(e.target.value) }
               />
               <MDBInput
-                label='Your password'
+                label="Your password"
                 group
-                type='password'
+                type="password"
                 validate
-                labelClass='white-text'
+                containerClass="mb-0"
+                onChange={(e)=> setPassword(e.target.value)}
               />
-              <div className='md-form pb-3'>
-                <MDBInput
-                  label={
-                    <>
-                      Accept the&nbsp;
-                      <a href='#!' className='green-text font-weight-bold'>
-                        Terms and Conditions
-                      </a>
-                    </>
-                  }
-                  type='checkbox'
-                  id='checkbox1'
-                  labelClass='white-text'
-                />
+              <p className="font-small blue-text d-flex justify-content-end pb-3">
+                Forgot
+                <a href="#!" className="blue-text ml-1">
+
+                  Password?
+                </a>
+              </p>
+              <div className="text-center mb-3">
+                <MDBBtn
+                  type="button"
+                  gradient="blue"
+                  rounded
+                  className="btn-block z-depth-1a"
+                  onClick={login}
+                >
+                  Sign in
+                </MDBBtn>
               </div>
-            
-              <MDBRow className='d-flex align-items-center mb-4'>
-                <div className='text-center mb-3 col-md-12'>
-                  <MDBBtn
-                    color='success'
-                    rounded
-                    type='button'
-                    className='btn-block z-depth-1'
-                  >
-                    Sign in
-                  </MDBBtn>
-                </div>
-              </MDBRow>
-              <MDBCol md='12'>
-                <p className='font-small white-text d-flex justify-content-end'>
-                  Have an account?
-                  <a href='#!' className='green-text ml-1 font-weight-bold'>
-                    Log in
-                  </a>
-                </p>
-              </MDBCol>
-            </div>
+              <p className="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">
+
+                or Sign in with:
+              </p>
+              <div className="row my-3 d-flex justify-content-center">
+                <MDBBtn
+                  type="button"
+                  color="white"
+                  rounded
+                  className="mr-md-3 z-depth-1a"
+                >
+                  <MDBIcon fab icon="facebook-f" className="blue-text text-center" />
+                </MDBBtn>
+                <MDBBtn
+                  type="button"
+                  color="white"
+                  rounded
+                  className="mr-md-3 z-depth-1a"
+                >
+                  <MDBIcon fab icon="twitter" className="blue-text" />
+                </MDBBtn>
+                <MDBBtn
+                  type="button"
+                  color="white"
+                  rounded
+                  className="z-depth-1a"
+                >
+                  <MDBIcon fab icon="google-plus-g" className="blue-text" />
+                </MDBBtn>
+              </div>
+            </MDBCardBody>
+            <MDBModalFooter className="mx-5 pt-3 mb-1">
+              <p className="font-small grey-text d-flex justify-content-end">
+                Not a member?
+                <a href="#!" className="blue-text ml-1">
+
+                  Sign Up
+                </a>
+              </p>
+            </MDBModalFooter>
           </MDBCard>
-          </MDBCol>
-          </MDBRow>
-          </MDBContainer>
+        </MDBCol>
+      </MDBRow>
+    </MDBContainer>
     )
 }
 

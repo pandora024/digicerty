@@ -10,6 +10,7 @@ import Home from './components/Home'
 //หน้าแอปส่วนหลักในการทำการ Route และrender หน้า
 
 import fire from './config/fire'
+import Register from './components/Register';
 
 const App = () => { 
 
@@ -19,7 +20,7 @@ const [user, setUser] = useState({})
 //     authListener
 //   },[])
 
- useMemo(() => {
+ useEffect(() => {
   fire.auth().onAuthStateChanged((user) => {
     if (user) {
       setUser({user})
@@ -45,6 +46,7 @@ return (
   <div>
     <Route exact path="/" component={Home} />
     <Route path="/login" component={Login} />
+    <Route path="/signup" component={Register} />
   
   </div>
 </div>
